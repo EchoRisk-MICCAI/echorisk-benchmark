@@ -1,0 +1,120 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+htmlcov/
+.tox/
+.nox/
+
+# Type checkers
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+.jupyter/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Model artefacts and large files — these do not belong in git
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.hdf5
+*.onnx
+*.pkl
+*.pickle
+*.joblib
+*.safetensors
+checkpoints/
+wandb/
+mlruns/
+lightning_logs/
+runs/
+outputs/
+
+# Data — must never be committed
+*.dcm
+*.nii
+*.nii.gz
+*.mhd
+*.raw
+data/
+datasets/
+*.csv.gz
+*.parquet
+
+# Allow documentation CSVs (schemas, examples) via explicit opt-in
+!docs/**/*.csv
+!evaluation/examples/*.csv
+!tests/**/*.csv
+
+# Logs
+*.log
+logs/
+
+# Local configuration
+.env.local
+*.local
+config.local.yaml
