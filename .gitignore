@@ -118,3 +118,4 @@ logs/
 .env.local
 *.local
 config.local.yaml
+!submission-example/fixture/videos/**/*.dcm
