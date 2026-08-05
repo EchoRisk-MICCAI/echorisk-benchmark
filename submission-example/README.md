@@ -61,8 +61,8 @@ Repeat for tasks 2 and 3 by changing the argument.
    version or framework (PyTorch, TensorFlow, etc.) — just keep the
    `ENTRYPOINT` and the `/app` working directory.
 4. Build and test locally against your own copy of the validation data
-   before pushing to Docker Hub (see below — the bundled fixture is not
-   suitable for this).
+   before pushing to Synapse's Docker registry (see below — the bundled
+   fixture is not suitable for this).
 
 ## Note on fixture data
 
@@ -98,13 +98,24 @@ contract — fix it before submitting your image tag on Synapse.
 
 ## Submitting
 
-1. Push your finished image to Docker Hub as a public repository, tagged
-   as `<synapse-team-name>-task<N>:<submission-tag>` (see §6 of the
-   harness spec).
-2. Go to the relevant Synapse evaluation queue
-   (`EchoRisk-Task1`, `EchoRisk-Task2`, or `EchoRisk-Task3`).
-3. Submit the image tag string as your submission.
+1. Confirm your Synapse account is a Certified User (**Account Settings
+   → Trust & Credentials**) — Docker push and submission fail silently
+   otherwise, with no error explaining why.
+2. Push your finished image to Synapse's Docker registry:
+   ```bash
+   docker login docker.synapse.org -u <your-synapse-username>
+   docker build -t docker.synapse.org/<your-synapse-project-id>/<image-name>:<tag> .
+   docker push docker.synapse.org/<your-synapse-project-id>/<image-name>:<tag>
+   ```
+3. Go to your own Synapse project's **Docker tab**, find your pushed
+   image, and click **Docker Repository Tools → Submit Docker Repository
+   to Challenge**. Select the evaluation queue matching your task.
+4. Only one designated submitter per team has submission access — the
+   Synapse account matching the Profile URL on your team's registration
+   form. If that person hasn't accepted the Synapse Team invitation
+   granting this access, submission is not possible until they do.
 
 Each team has one final submission per task queue; only your last
 submission before the deadline is evaluated. Submit only when you are
-confident this is your final container.
+confident this is your final container. Full details:
+[Docker Submission Guide](https://echorisk-miccai.github.io/submission-guide.html).

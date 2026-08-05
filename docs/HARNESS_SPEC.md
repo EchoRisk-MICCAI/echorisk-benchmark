@@ -175,15 +175,16 @@ image per task**, each to its corresponding Synapse evaluation queue.
 
 Name and tag your image as:
 
-```
-<synapse-team-name>-task<N>:<submission-tag>
-```
+Docker repository and tag naming follows the convention published on the
+challenge website: `TeamName_TaskX_vN` (e.g. `CardioVisionLab_Task1_v3`).
+This is a recommendation for clarity, not enforced by the evaluation
+harness — the harness identifies your submission by the exact image tag
+string you submit via the Synapse evaluation queue, not by parsing your
+tag name.
 
-Example: `cardiovision-lab-task2:final`
-
-Use a descriptive tag for `<submission-tag>` (e.g. `final`, `v2`) rather
-than `latest`, since the evaluation server pulls the exact tag you submit
-on Synapse and `latest` invites accidental overwrites between your
+Use a descriptive, versioned tag (e.g. `v1`, `v2`, `final`) rather than
+`latest`, since the evaluation server pulls the exact tag you submit on
+Synapse, and `latest` invites accidental overwrites between your
 development pushes and your actual final submission.
 
 ## 7. Operational constraints
