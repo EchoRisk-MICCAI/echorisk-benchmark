@@ -20,6 +20,7 @@ docker run --rm \
     --gpus '"device=0"' \
     --network none \
     --memory 40g \
+    --shm-size 512m \
     -v /path/to/test/input:/input:ro \
     -v /path/to/scratch/output:/output \
     <image>:<tag>
@@ -37,6 +38,16 @@ docker run --rm \
   has 48 GB total; 40 GB is made available per container run, leaving
   headroom for the host OS and evaluation harness process. Design for this
   ceiling, not the full 48 GB.
+- `--shm-size 512m` raises Docker's default 64 MB shared memory pool
+  (`/dev/shm`). PyTorch's `DataLoader` (and similar multi-process data
+  loading in other frameworks) passes tensors between worker processes
+  through shared memory; the 64 MB default is easily exceeded by large
+  uncompressed 3D DICOM video arrays and causes a fatal Bus error (SIGBUS)
+  crash, unrelated to model correctness. If your pipeline uses multi-process
+  data loading, test locally against this exact 512 MB value, not a larger
+  one — a bigger local pool can mask a crash that only appears under the
+  evaluation server's actual limit. This 512 MB is drawn from the same
+  `--memory 40g` ceiling above, not additional overhead.
 - No arguments are passed. Do not require CLI flags, stdin input, or
   environment variables at run time.
 - `-v /path/to/test/input:/input:ro` mounts the test data into the container at /input, read-only (:ro). /path/to/test/input is a placeholder for wherever the real test data lives on the evaluation server; you never see or control that path — from inside your container, it always appears at /input, exactly as documented in §2. The :ro means your container cannot modify or delete the test data, only read it. 

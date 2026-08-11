@@ -33,6 +33,8 @@ echo "Running ${IMAGE_TAG} against fixture data..."
 docker run --rm \
   "${GPU_FLAGS[@]}" \
   --network none \
+  --memory 40g \
+  --shm-size 512m \
   -v "${SCRIPT_DIR}/fixture:/input:ro" \
   -v "${OUTPUT_DIR}:/output" \
   "${IMAGE_TAG}"
